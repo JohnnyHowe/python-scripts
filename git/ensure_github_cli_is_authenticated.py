@@ -1,6 +1,5 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 """Check GitHub CLI availability and login status."""
-
 from __future__ import annotations
 
 import argparse

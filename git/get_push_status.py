@@ -1,3 +1,5 @@
+"""Compute ahead/behind status for a branch against its upstream."""
+import argparse
 from enum import Enum
 import subprocess
 
@@ -34,7 +36,7 @@ def _local_branch_exists(branch_name: str) -> bool:
 		["git", "show-ref", "--verify", f"refs/heads/{branch_name}"],
 		capture_output=True,
 		text=True,
-		check=False
+		check=False,
 	)
 	return result.returncode == 0
 
@@ -44,7 +46,7 @@ def _get_upstream(branch_name: str) -> str:
 		["git", "for-each-ref", "--format=%(upstream:short)", f"refs/heads/{branch_name}"],
 		capture_output=True,
 		text=True,
-		check=False
+		check=False,
 	)
 	return result.stdout.strip()
 
@@ -54,7 +56,7 @@ def _get_ahead_behind(upstream: str, branch_name: str) -> tuple[int, int]:
 		["git", "rev-list", "--left-right", "--count", f"{upstream}...{branch_name}"],
 		capture_output=True,
 		text=True,
-		check=False
+		check=False,
 	)
 	if result.returncode != 0:
 		return (0, 0)
@@ -62,3 +64,11 @@ def _get_ahead_behind(upstream: str, branch_name: str) -> tuple[int, int]:
 	if len(parts) != 2:
 		return (0, 0)
 	return (int(parts[0]), int(parts[1]))
+
+
+if __name__ == "__main__":
+	parser = argparse.ArgumentParser(description="Compute ahead/behind status for a branch against its upstream.")
+	parser.add_argument("branch_name", help="Local branch name to check.")
+	args = parser.parse_args()
+
+	print(get_push_status(args.branch_name).name)

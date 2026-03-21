@@ -16,7 +16,7 @@ class MergeStatus(Enum):
 	NOT_PUSHED = 3
 
 
-def get_push_status(branch_name: str, repo_root: Path | None = None) -> MergeStatus:
+def get_merge_status(branch_name: str, repo_root: Path | None = None) -> MergeStatus:
 	repo_root = repo_root or get_repo_root()
 	if not _local_branch_exists(branch_name, repo_root):
 		return MergeStatus.LOCAL_BEHIND
@@ -42,7 +42,7 @@ def _local_branch_exists(branch_name: str, repo_root: Path) -> bool:
 		["git", "-C", str(repo_root), "show-ref", "--verify", f"refs/heads/{branch_name}"],
 		capture_output=True,
 		text=True,
-		check=False
+		check=False,
 	)
 	return result.returncode == 0
 
@@ -52,7 +52,7 @@ def _get_upstream(branch_name: str, repo_root: Path) -> str:
 		["git", "-C", str(repo_root), "for-each-ref", "--format=%(upstream:short)", f"refs/heads/{branch_name}"],
 		capture_output=True,
 		text=True,
-		check=False
+		check=False,
 	)
 	return result.stdout.strip()
 
@@ -62,7 +62,7 @@ def _get_ahead_behind(upstream: str, branch_name: str, repo_root: Path) -> tuple
 		["git", "-C", str(repo_root), "rev-list", "--left-right", "--count", f"{upstream}...{branch_name}"],
 		capture_output=True,
 		text=True,
-		check=False
+		check=False,
 	)
 	if result.returncode != 0:
 		return (0, 0)
@@ -77,4 +77,4 @@ if __name__ == "__main__":
 	parser.add_argument("branch_name", help="Local branch name to check.")
 	args = parser.parse_args()
 
-	print(get_push_status(args.branch_name).name)
+	print(get_merge_status(args.branch_name).name)

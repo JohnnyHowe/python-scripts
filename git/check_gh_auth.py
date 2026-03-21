@@ -1,8 +1,8 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 """Check GitHub CLI availability and login status."""
-
 from __future__ import annotations
 
+import argparse
 import shutil
 import subprocess
 
@@ -26,4 +26,7 @@ def check_gh_auth() -> int:
 
 
 if __name__ == "__main__":
+	parser = argparse.ArgumentParser(description="Check GitHub CLI availability and login status.")
+	parser.parse_args()
+
 	raise SystemExit(check_gh_auth())

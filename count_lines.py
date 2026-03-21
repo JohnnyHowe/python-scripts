@@ -1,31 +1,38 @@
-import os
+"""
+Count lines for files with a given extension under a directory.
+"""
+import argparse
+from pathlib import Path
 
-def count_non_whitespace_lines(directory):
-    total_lines = 0
-    total_files = 0
 
-    for root, _, files in os.walk(directory):
-        for file in files:
-            if file.endswith('.cs'):  # Adjust file extension as needed
-                total_files += 1
-                filepath = os.path.join(root, file)
-                try: 
-                    with open(filepath, 'r') as f:
-                        lines = f.readlines()
-                        for line in lines:
-                            # if line.strip() != "":
-                            total_lines += 1
-                except:
-                    print(f"Error reading file: {filepath}")           
-    return total_lines, total_files
+def count_lines(directory: Path, extension: str) -> int:
+	total_lines = 0
+	total_files = 0
+
+	for path in directory.rglob(f"*{extension}"):
+		if not path.is_file():
+			continue
+		total_files += 1
+		try:
+			with open(path, "r", encoding="utf-8") as file:
+				for _ in file:
+					total_lines += 1
+		except Exception:
+			print(f"Error reading file: {path}")
+
+	print(f"Total number of files: {total_files}")
+	print(f"Total lines of code: {total_lines}")
+	return 0
 
 
 if __name__ == "__main__":
-    directory = input("Enter the directory path: ")
-    if (directory == ""):
-        directory = os.getcwd()
-    if (directory.startswith("/")):
-        directory = os.getcwd() + "/" + directory
-    lines_count, files_count = count_non_whitespace_lines(directory)
-    print(f"Total number of files: {files_count}")
-    print(f"Total non-whitespace lines of code: {lines_count}")
+	parser = argparse.ArgumentParser(description="Count lines for files with a given extension.")
+	parser.add_argument("directory", type=Path, nargs="?", default=Path.cwd(), help="Root directory to scan.")
+	parser.add_argument("--ext", default=".cs", help="File extension to include (default: .cs).")
+	args = parser.parse_args()
+
+	extension = args.ext.lower()
+	if not extension.startswith("."):
+		extension = f".{extension}"
+
+	raise SystemExit(count_lines(args.directory, extension))

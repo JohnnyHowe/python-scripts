@@ -1,20 +1,32 @@
 """
-Tool to alpha borders off images.
-Run from command line with folder path. If none given, it uses current working dir.
-
-Example
-python crop_to_content.py "C:\\Users\\Work\\Documents\\Images To Crop"
+Crop transparent borders from images in a folder.
 """
-import sys
-from PIL import Image, ImageChops
+import argparse
 from pathlib import Path
+from PIL import Image, ImageChops
 
 
-def crop_to_content(path_in, path_out):
+DEFAULT_EXTENSIONS = [".png", ".jpg", ".jpeg", ".bmp", ".gif", ".tiff"]
+
+
+def crop_image_to_content(folder: Path, extensions: list[str]) -> int:
+	images = _get_image_paths(folder, extensions)
+	if not images:
+		print("No matching images found.")
+		return 0
+
+	for image_path in images:
+		_crop_to_content(image_path, image_path)
+
+	print(f"Images cropped: {len(images)}")
+	return 0
+
+
+def _crop_to_content(path_in: Path, path_out: Path) -> None:
 	image = Image.open(path_in)
 
-	if not has_transparency(image):
-		raise Exception("Image type not supported for %s" % path_in)
+	if not _has_transparency(image):
+		raise Exception(f"Image type not supported for {path_in}")
 
 	new_image = Image.new(image.mode, image.size, (0, 0, 0, 0))
 
@@ -26,24 +38,22 @@ def crop_to_content(path_in, path_out):
 	image.save(path_out)
 
 
-def has_transparency(image):
+def _has_transparency(image: Image.Image) -> bool:
 	return image.mode in ("RGBA", "LA") or (image.mode == "P" and "transparency" in image.info)
 
 
-def get_image_paths(folder, exts=(".png", ".jpg", ".jpeg", ".bmp", ".gif", ".tiff")):
-    folder = Path(folder)
-    return [p for p in folder.iterdir() if p.suffix.lower() in exts]
-
-
-def crop(folder_path):
-	for image in get_image_paths(folder_path):
-		crop_to_content(image, image)
+def _get_image_paths(folder: Path, extensions: list[str]) -> list[Path]:
+	return [p for p in folder.iterdir() if p.is_file() and p.suffix.lower() in extensions]
 
 
 if __name__ == "__main__":
-	path = "./"
-	if len(sys.argv) > 2:
-		raise Exception("Only accepts one (or none for this folder) arg: path")
-	elif len(sys.argv) == 2:
-		path = sys.argv[1]
-	crop(path)
+	parser = argparse.ArgumentParser(description="Crop transparent borders from images in a folder.")
+	parser.add_argument("folder", type=Path, nargs="?", default=Path.cwd(), help="Folder to scan.")
+	parser.add_argument("--ext", action="append", default=[], help="File extension to include (repeatable).")
+	args = parser.parse_args()
+
+	extensions = [ext.lower() if ext.startswith(".") else f".{ext.lower()}" for ext in args.ext]
+	if not extensions:
+		extensions = DEFAULT_EXTENSIONS
+
+	raise SystemExit(crop_image_to_content(args.folder, extensions))
