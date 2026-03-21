@@ -1,7 +1,7 @@
 This file was generated using the output of each script with "--help"
 # check
 
-## check_packages_page_size_in_apk.py
+## [check_packages_page_size_in_apk.py](check_packages_page_size_in_apk.py)
 ```text
 usage: check_packages_page_size_in_apk.py [-h] --so-dir SO_DIR
                                           [--readelf-path READELF_PATH]
@@ -20,7 +20,7 @@ options:
 
 # delete
 
-## delete_all_cache.py
+## [delete_all_cache.py](delete_all_cache.py)
 ```text
 usage: delete_all_cache.py [-h] [--project-root PROJECT_ROOT]
                            [--no-unity-cache] [--no-gradle-cache] [--safe]
@@ -36,7 +36,7 @@ options:
   --safe                Send folders to recycle bin instead of deleting.
 ```
 
-## delete_corrupt_meta.py
+## [delete_corrupt_meta.py](delete_corrupt_meta.py)
 ```text
 usage: delete_corrupt_meta.py [-h] [--yes]
 
@@ -49,7 +49,7 @@ options:
 
 # get
 
-## get_all_resources.py
+## [get_all_resources.py](get_all_resources.py)
 ```text
 usage: get_all_resources.py [-h] [--root ROOT] --output OUTPUT
 
@@ -63,7 +63,7 @@ options:
 
 # move
 
-## move_files_to_non_import_folders.py
+## [move_files_to_non_import_folders.py](move_files_to_non_import_folders.py)
 ```text
 usage: move_files_to_non_import_folders.py [-h] [--root ROOT]
                                            [--pattern PATTERN]

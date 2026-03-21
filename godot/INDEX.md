@@ -1,7 +1,7 @@
 This file was generated using the output of each script with "--help"
 # godot
 
-## godot_delete_redunant_import_files.py
+## [godot_delete_redunant_import_files.py](godot_delete_redunant_import_files.py)
 ```text
 usage: godot_delete_redunant_import_files.py [-h] [--silent] [path]
 

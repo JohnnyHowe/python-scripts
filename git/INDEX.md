@@ -1,7 +1,7 @@
 This file was generated using the output of each script with "--help"
 # check
 
-## check_gh_auth.py
+## [check_gh_auth.py](check_gh_auth.py)
 ```text
 usage: check_gh_auth.py [-h]
 
@@ -13,7 +13,7 @@ options:
 
 # delete
 
-## delete_branches_already_merged.py
+## [delete_branches_already_merged.py](delete_branches_already_merged.py)
 ```text
 usage: delete_branches_already_merged.py [-h] [--remote] [--ignore IGNORE]
                                          base_branch
@@ -32,7 +32,7 @@ options:
 
 # ensure
 
-## ensure_github_cli_is_authenticated.py
+## [ensure_github_cli_is_authenticated.py](ensure_github_cli_is_authenticated.py)
 ```text
 usage: ensure_github_cli_is_authenticated.py [-h] [--verbose]
 
@@ -45,7 +45,7 @@ options:
 
 # get
 
-## get_all_branches.py
+## [get_all_branches.py](get_all_branches.py)
 ```text
 usage: get_all_branches.py [-h] [--local-only] [--keep-origin]
 
@@ -57,7 +57,7 @@ options:
   --keep-origin  Keep the origin/ prefix on remote branches.
 ```
 
-## get_branch_tidy_status.py
+## [get_branch_tidy_status.py](get_branch_tidy_status.py)
 ```text
 usage: get_branch_tidy_status.py [-h]
 
@@ -67,7 +67,7 @@ options:
   -h, --help  show this help message and exit
 ```
 
-## get_branch_tidy_status_pretty.py
+## [get_branch_tidy_status_pretty.py](get_branch_tidy_status_pretty.py)
 ```text
 usage: get_branch_tidy_status_pretty.py [-h]
 
@@ -77,7 +77,7 @@ options:
   -h, --help  show this help message and exit
 ```
 
-## get_branches_already_merged.py
+## [get_branches_already_merged.py](get_branches_already_merged.py)
 ```text
 usage: get_branches_already_merged.py [-h] [--remotes] [--all] base_branch
 
@@ -92,7 +92,7 @@ options:
   --all        Include both local and remote branches.
 ```
 
-## get_branches_in_pull_request.py
+## [get_branches_in_pull_request.py](get_branches_in_pull_request.py)
 ```text
 usage: get_branches_in_pull_request.py [-h]
 
@@ -102,7 +102,7 @@ options:
   -h, --help  show this help message and exit
 ```
 
-## get_merge_status.py
+## [get_merge_status.py](get_merge_status.py)
 ```text
 usage: get_merge_status.py [-h] branch_name
 
@@ -115,7 +115,7 @@ options:
   -h, --help   show this help message and exit
 ```
 
-## get_push_status.py
+## [get_push_status.py](get_push_status.py)
 ```text
 usage: get_push_status.py [-h] branch_name
 
@@ -128,7 +128,7 @@ options:
   -h, --help   show this help message and exit
 ```
 
-## get_repo_root.py
+## [get_repo_root.py](get_repo_root.py)
 ```text
 usage: get_repo_root.py [-h]
 
@@ -140,7 +140,7 @@ options:
 
 # git
 
-## git_script_config.py
+## [git_script_config.py](git_script_config.py)
 ```text
 usage: git_script_config.py [-h]
 
@@ -152,7 +152,7 @@ options:
 
 # has
 
-## has_merge_conflicts.py
+## [has_merge_conflicts.py](has_merge_conflicts.py)
 ```text
 usage: has_merge_conflicts.py [-h] [--verbose] target source
 
@@ -169,7 +169,7 @@ options:
 
 # print
 
-## print_table.py
+## [print_table.py](print_table.py)
 ```text
 usage: print_table.py [-h] --headers HEADERS [--row ROW]
 
@@ -183,7 +183,7 @@ options:
 
 # pull
 
-## pull_all_remote_branches.py
+## [pull_all_remote_branches.py](pull_all_remote_branches.py)
 ```text
 usage: pull_all_remote_branches.py [-h]
 
@@ -196,7 +196,7 @@ options:
 
 # remove
 
-## remove_tracked_files_in_gitignore.py
+## [remove_tracked_files_in_gitignore.py](remove_tracked_files_in_gitignore.py)
 ```text
 usage: remove_tracked_files_in_gitignore.py [-h] [--dry-run]
 

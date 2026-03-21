@@ -6,23 +6,24 @@ This file was generated using the output of each script with "--help"
 
 # combine
 
-## combine_text_lines.py
+## [combine_text_lines.py](combine_text_lines.py)
 ```text
-usage: combine_text_lines.py [-h] --file FILE output
+usage: combine_text_lines.py [-h] --file FILE [--sort] output
 
 Combine unique non-empty lines from input files.
 
 positional arguments:
-  output           Output file to write.
+  output       Output file to write.
 
 options:
-  -h, --help       show this help message and exit
-  --file, -f FILE  Input file to read.
+  -h, --help   show this help message and exit
+  --file FILE  Input file to read.
+  --sort       Sort the lines?
 ```
 
 # convert
 
-## convert_to_mono.py
+## [convert_to_mono.py](convert_to_mono.py)
 ```text
 usage: convert_to_mono.py [-h] [--ext EXT] [--dry-run] folder
 
@@ -39,7 +40,7 @@ options:
 
 # count
 
-## count_lines.py
+## [count_lines.py](count_lines.py)
 ```text
 usage: count_lines.py [-h] [--ext EXT] [directory]
 
@@ -55,7 +56,7 @@ options:
 
 # crop
 
-## crop_image_to_content.py
+## [crop_image_to_content.py](crop_image_to_content.py)
 ```text
 usage: crop_image_to_content.py [-h] [--ext EXT] [folder]
 
@@ -69,7 +70,7 @@ options:
   --ext EXT   File extension to include (repeatable).
 ```
 
-## crop_images_to_multiples_of_4.py
+## [crop_images_to_multiples_of_4.py](crop_images_to_multiples_of_4.py)
 ```text
 usage: crop_images_to_multiples_of_4.py [-h] [--ext EXT] folder
 
@@ -85,7 +86,7 @@ options:
 
 # get
 
-## get_all_non_snake_case_files.py
+## [get_all_non_snake_case_files.py](get_all_non_snake_case_files.py)
 ```text
 usage: get_all_non_snake_case_files.py [-h] [--ignore IGNORE] root
 
@@ -101,7 +102,7 @@ options:
 
 # json
 
-## json_tidier.py
+## [json_tidier.py](json_tidier.py)
 ```text
 usage: json_tidier.py [-h] [path]
 
@@ -116,7 +117,7 @@ options:
 
 # repo
 
-## repo_copier.py
+## [repo_copier.py](repo_copier.py)
 ```text
 usage: repo_copier.py [-h] project_directory destination_directory
 
@@ -134,7 +135,7 @@ options:
 
 # scale
 
-## scale_and_crop_video.py
+## [scale_and_crop_video.py](scale_and_crop_video.py)
 ```text
 usage: scale_and_crop_video.py [-h] [-r RESOLUTION] [--overwrite]
                                source output

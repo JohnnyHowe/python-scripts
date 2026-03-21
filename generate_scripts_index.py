@@ -116,7 +116,7 @@ def _get_group_key(script_path: Path) -> str:
 def _get_script_markdown(script_path: Path) -> str:
 	help_output, success = _get_help_output(script_path)
 
-	header = script_path.name
+	header = f"[{script_path.name}]({script_path.name})"
 	if not success:
 		header = f"<span style=\"color:red\">{header}</span>"
 
