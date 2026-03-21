@@ -1,9 +1,4 @@
 This file was generated using the output of each script with "--help"
-# Subfolders
- - [git/](git/INDEX.md)
- - [godot/](godot/INDEX.md)
- - [Unity/](Unity/INDEX.md)
-
 # combine
 
 ## [combine_text_lines.py](combine_text_lines.py)
@@ -54,36 +49,6 @@ options:
   --ext EXT   File extension to include (default: .cs).
 ```
 
-# crop
-
-## [crop_image_to_content.py](crop_image_to_content.py)
-```text
-usage: crop_image_to_content.py [-h] [--ext EXT] [folder]
-
-Crop transparent borders from images in a folder.
-
-positional arguments:
-  folder      Folder to scan.
-
-options:
-  -h, --help  show this help message and exit
-  --ext EXT   File extension to include (repeatable).
-```
-
-## [crop_images_to_multiples_of_4.py](crop_images_to_multiples_of_4.py)
-```text
-usage: crop_images_to_multiples_of_4.py [-h] [--ext EXT] folder
-
-Crop images so width and height are multiples of 4.
-
-positional arguments:
-  folder      Path to the folder containing images.
-
-options:
-  -h, --help  show this help message and exit
-  --ext EXT   File extension to include (repeatable).
-```
-
 # get
 
 ## [get_all_non_snake_case_files.py](get_all_non_snake_case_files.py)
@@ -98,6 +63,77 @@ positional arguments:
 options:
   -h, --help       show this help message and exit
   --ignore IGNORE  Regex pattern to ignore (repeatable).
+```
+
+# image
+
+## [image_color_to_alpha.py](image_color_to_alpha.py)
+```text
+usage: image_color_to_alpha.py [-h]
+                               [--max_color_difference MAX_COLOR_DIFFERENCE]
+                               [--verbose]
+                               input_image_path output_image_path
+                               target_color_hex
+
+Replace a target color in an image with transparency.
+
+positional arguments:
+  input_image_path      Path to the input image file.
+  output_image_path     Path to write the output image file.
+  target_color_hex      Target color in hex, e.g. #ff00aa.
+
+options:
+  -h, --help            show this help message and exit
+  --max_color_difference MAX_COLOR_DIFFERENCE
+                        Maximum color difference for replacement. Default: 1.
+  --verbose             Print progress details.
+```
+
+## [image_crop_folders_to_multiples_of_4.py](image_crop_folders_to_multiples_of_4.py)
+```text
+usage: image_crop_folders_to_multiples_of_4.py [-h] [--ext EXT] folder
+
+Crop images so width and height are multiples of 4.
+
+positional arguments:
+  folder      Path to the folder containing images.
+
+options:
+  -h, --help  show this help message and exit
+  --ext EXT   File extension to include (repeatable).
+```
+
+## [image_crop_to_content.py](image_crop_to_content.py)
+```text
+usage: image_crop_to_content.py [-h] [--ext EXT] [folder]
+
+Crop transparent borders from images in a folder.
+
+positional arguments:
+  folder      Folder to scan.
+
+options:
+  -h, --help  show this help message and exit
+  --ext EXT   File extension to include (repeatable).
+```
+
+## [image_merge_as_layers.py](image_merge_as_layers.py)
+```text
+usage: image_merge_as_layers.py [-h] [--input_folder INPUT_FOLDER]
+                                [--image IMAGE] [--verbose]
+                                output_file
+
+Merge images into one composited output image.
+
+positional arguments:
+  output_file           Path for the combined output image
+
+options:
+  -h, --help            show this help message and exit
+  --input_folder INPUT_FOLDER
+                        Folder containing images
+  --image IMAGE         Image file path. Repeat for multiple.
+  --verbose
 ```
 
 # json
