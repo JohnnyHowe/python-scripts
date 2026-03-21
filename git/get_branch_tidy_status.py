@@ -11,7 +11,7 @@ sys.path.append(str(Path(__file__).parent))
 from get_branches_in_pull_request import get_branches_in_pull_request
 from has_merge_conflicts import has_merge_conflicts
 from get_repo_root import get_repo_root
-from get_merge_status import get_push_status, MergeStatus
+from get_merge_status import get_merge_status, MergeStatus
 from get_all_branches import get_all_branches
 
 try:
@@ -45,10 +45,10 @@ def get_branch_tidy_status() -> Iterable[list[str | BranchStatus | MergeStatus]]
 		branches_with_status.sort()
 		for branch in branches_with_status:
 			branches.remove(branch)
-			yield([branch, status, get_push_status(branch)])
+			yield([branch, status, get_merge_status(branch)])
 
 	for branch in branches:
-		yield [branch, BranchStatus.UNKNOWN, get_push_status(branch)]
+		yield [branch, BranchStatus.UNKNOWN, get_merge_status(branch)]
 
 
 def _get_branches_with_status(branches: list[str], status: BranchStatus) -> Iterable[str]:

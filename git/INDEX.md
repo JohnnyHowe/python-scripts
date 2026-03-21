@@ -57,32 +57,26 @@ options:
   --keep-origin  Keep the origin/ prefix on remote branches.
 ```
 
-## <span style="color:red">get_branch_tidy_status.py</span>
-```
-'C:\Users\Work\AppData\Local\Programs\Python\Python313\python.exe' 'git\get_branch_tidy_status.py' --help
+## get_branch_tidy_status.py
+```text
+usage: get_branch_tidy_status.py [-h]
+
+Print branch tidy status as comma-separated rows.
+
+options:
+  -h, --help  show this help message and exit
 ```
 
-Resulted in
-```
-Traceback (most recent call last):
-  File "C:\Users\Work\Documents\Projects\python-scripts\git\get_branch_tidy_status.py", line 14, in <module>
-    from get_merge_status import get_push_status, MergeStatus
-ImportError: cannot import name 'get_push_status' from 'get_merge_status' (C:\Users\Work\Documents\Projects\python-scripts\git\get_merge_status.py). Did you mean: 'get_merge_status'?
-```
-## <span style="color:red">get_branch_tidy_status_pretty.py</span>
-```
-'C:\Users\Work\AppData\Local\Programs\Python\Python313\python.exe' 'git\get_branch_tidy_status_pretty.py' --help
+## get_branch_tidy_status_pretty.py
+```text
+usage: get_branch_tidy_status_pretty.py [-h]
+
+Summarize local git branches with merge and push status.
+
+options:
+  -h, --help  show this help message and exit
 ```
 
-Resulted in
-```
-Traceback (most recent call last):
-  File "C:\Users\Work\Documents\Projects\python-scripts\git\get_branch_tidy_status_pretty.py", line 9, in <module>
-    from get_branch_tidy_status import BranchStatus, get_branch_tidy_status
-  File "C:\Users\Work\Documents\Projects\python-scripts\git\get_branch_tidy_status.py", line 14, in <module>
-    from get_merge_status import get_push_status, MergeStatus
-ImportError: cannot import name 'get_push_status' from 'get_merge_status' (C:\Users\Work\Documents\Projects\python-scripts\git\get_merge_status.py). Did you mean: 'get_merge_status'?
-```
 ## get_branches_already_merged.py
 ```text
 usage: get_branches_already_merged.py [-h] [--remotes] [--all] base_branch
@@ -108,19 +102,6 @@ options:
   -h, --help  show this help message and exit
 ```
 
-## <span style="color:red">get_git_tidy_status.py</span>
-```
-'C:\Users\Work\AppData\Local\Programs\Python\Python313\python.exe' 'git\get_git_tidy_status.py' --help
-```
-
-Resulted in
-```
-Traceback (most recent call last):
-  File "C:\Users\Work\Documents\Projects\python-scripts\git\get_git_tidy_status.py", line 72, in <module>
-    Status.MERGED_IN_TO_TARGET: _colorize(f"Merged into {MERGE_CHECK_TARGET}", "yellow"),
-                                                         ^^^^^^^^^^^^^^^^^^
-NameError: name 'MERGE_CHECK_TARGET' is not defined
-```
 ## get_merge_status.py
 ```text
 usage: get_merge_status.py [-h] branch_name

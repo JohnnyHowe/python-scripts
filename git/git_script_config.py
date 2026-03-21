@@ -2,14 +2,14 @@
 import argparse
 import json
 
-_MERGE_CHECK_TARGET = "dev"
-_ALWAYS_KEEP_BRANCHES = ["main", "dev"]
+MERGE_CHECK_TARGET = "dev"
+ALWAYS_KEEP_BRANCHES = ["main", "dev"]
 
 
 def git_script_config() -> dict[str, object]:
 	return {
-		"merge_check_target": _MERGE_CHECK_TARGET,
-		"always_keep_branches": list(_ALWAYS_KEEP_BRANCHES),
+		"merge_check_target": MERGE_CHECK_TARGET,
+		"always_keep_branches": list(ALWAYS_KEEP_BRANCHES),
 	}
 
 
