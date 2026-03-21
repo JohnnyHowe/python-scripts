@@ -1,3 +1,5 @@
+See [INDEX.md](./INDEX.md)
+
 This folder and subfolders contain a bunch of Python scripts.
 
 # Goal/Constraints
