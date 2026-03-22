@@ -11,6 +11,29 @@ options:
   -h, --help  show this help message and exit
 ```
 
+# copy
+
+## [copy_project.py](copy_project.py)
+```text
+usage: copy_project.py [-h] [--only-folder ONLY_FOLDER] [--ignore IGNORE]
+                       [--verbose]
+                       source destination
+
+Copy a git repo folder recursively, honoring .gitignore.
+
+positional arguments:
+  source                Path to the source git repo.
+  destination           Path to the destination directory.
+
+options:
+  -h, --help            show this help message and exit
+  --only-folder ONLY_FOLDER
+                        Only copy files under this repo-relative folder.
+  --ignore IGNORE       Additional regex match patterns to exclude
+                        (repeatable).
+  --verbose             Print copied files.
+```
+
 # delete
 
 ## [delete_branches_already_merged.py](delete_branches_already_merged.py)

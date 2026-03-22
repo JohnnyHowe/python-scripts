@@ -1,4 +1,9 @@
 This file was generated using the output of each script with "--help"
+# Subfolders
+ - [git/](git/INDEX.md)
+ - [godot/](godot/INDEX.md)
+ - [Unity/](Unity/INDEX.md)
+
 # combine
 
 ## [combine_text_lines.py](combine_text_lines.py)
@@ -149,24 +154,6 @@ positional arguments:
 
 options:
   -h, --help  show this help message and exit
-```
-
-# repo
-
-## [repo_copier.py](repo_copier.py)
-```text
-usage: repo_copier.py [-h] project_directory destination_directory
-
-Copy a repo's tracked files into a clean destination directory.
-
-positional arguments:
-  project_directory     Path to the project repo to copy.
-  destination_directory
-                        Path to the destination directory to create and
-                        populate.
-
-options:
-  -h, --help            show this help message and exit
 ```
 
 # scale
