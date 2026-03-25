@@ -1,5 +1,6 @@
 This file was generated using the output of each script with "--help"
 # Subfolders
+ - [audio/](audio/INDEX.md)
  - [git/](git/INDEX.md)
  - [godot/](godot/INDEX.md)
  - [Unity/](Unity/INDEX.md)
@@ -19,23 +20,6 @@ options:
   -h, --help   show this help message and exit
   --file FILE  Input file to read.
   --sort       Sort the lines?
-```
-
-# convert
-
-## [convert_to_mono.py](convert_to_mono.py)
-```text
-usage: convert_to_mono.py [-h] [--ext EXT] [--dry-run] folder
-
-Convert all audio files in a folder to mono.
-
-positional arguments:
-  folder      Folder to scan recursively.
-
-options:
-  -h, --help  show this help message and exit
-  --ext EXT   File extension to include (repeatable).
-  --dry-run   Print what would change without writing files.
 ```
 
 # count
