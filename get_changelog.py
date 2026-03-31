@@ -15,7 +15,7 @@ SUB_HEADING_PATTERN = r"^### (.*)$"
 SUB_HEADING_RE = re.compile(SUB_HEADING_PATTERN)
 
 
-def get_changelog(path: Path, version: str, strip_version_header: bool, custom_sub_heading: Optional[str]) -> str:
+def get_changelog(path: Path, version: str, strip_version_header: bool, custom_sub_header: Optional[str]) -> str:
 	if not path.exists():
 		raise FileNotFoundError(
 			f"Could not find anything at {str(path.resolve)}")
@@ -30,9 +30,9 @@ def get_changelog(path: Path, version: str, strip_version_header: bool, custom_s
 	if strip_version_header:
 		changelog_lines = changelog_lines[1:]
 
-	if custom_sub_heading is not None:
+	if custom_sub_header is not None:
 		changelog_lines = list(_apply_custom_sub_heading(
-			changelog_lines, custom_sub_heading))
+			changelog_lines, custom_sub_header))
 
 	changelog = "".join(changelog_lines)
 	return changelog.strip()
@@ -72,13 +72,13 @@ def _get_version_header_line_numbers(lines: list[str]) -> Iterator[tuple[str, in
 			yield (match.group(1), line_index)
 
 
-def _apply_custom_sub_heading(lines: list[str], custom_sub_heading: str) -> Iterator[str]:
+def _apply_custom_sub_heading(lines: list[str], custom_sub_header: str) -> Iterator[str]:
 	for i in range(len(lines)):
 		match = SUB_HEADING_RE.match(lines[i])
 		if not match:
 			yield lines[i]
 		else:
-			yield custom_sub_heading + match.group(1) + "\n"
+			yield custom_sub_header + match.group(1) + "\n"
 
 
 def _parse_args() -> argparse.Namespace:
@@ -103,7 +103,7 @@ def _parse_args() -> argparse.Namespace:
 	)
 
 	parser.add_argument(
-		"--custom-sub-heading",
+		"--custom-sub-header",
 		nargs="?",
 		const="",
 		default=None,
@@ -119,6 +119,6 @@ if __name__ == "__main__":
 		args.path,
 		args.version,
 		args.no_version_header,
-		args.custom_sub_heading
+		args.custom_sub_header
 	)
 	print(changelog)
