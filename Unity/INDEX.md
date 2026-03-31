@@ -47,6 +47,28 @@ options:
   --yes       Delete without prompting.
 ```
 
+# find
+
+## [find_references_by_guid.py](find_references_by_guid.py)
+```text
+usage: find_references_by_guid.py [-h] [--project-root PROJECT_ROOT]
+                                  [--verbose] [--jobs JOBS] [--ordered]
+                                  guid
+
+Find all files that reference a Unity GUID.
+
+positional arguments:
+  guid                  Unity GUID to search for.
+
+options:
+  -h, --help            show this help message and exit
+  --project-root PROJECT_ROOT
+                        Unity project root.
+  --verbose             Print match counts.
+  --jobs JOBS           Number of worker processes to use.
+  --ordered             Preserve file order when using multiple workers.
+```
+
 # get
 
 ## [get_all_resources.py](get_all_resources.py)

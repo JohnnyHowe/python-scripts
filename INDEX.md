@@ -58,14 +58,14 @@ options:
 ```text
 usage: get_changelog.py [-h] [--path PATH] [--version VERSION]
                         [--no-version-header]
-                        [--custom-sub-heading [CUSTOM_SUB_HEADING]]
+                        [--custom-sub-header [CUSTOM_SUB_HEADER]]
 
 options:
   -h, --help            show this help message and exit
   --path PATH
   --version VERSION     Defaults to most recent
   --no-version-header
-  --custom-sub-heading [CUSTOM_SUB_HEADING]
+  --custom-sub-header [CUSTOM_SUB_HEADER]
                         Replaces the "### " before subheadings like "Fixed".
 ```
 
