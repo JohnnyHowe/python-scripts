@@ -54,6 +54,21 @@ options:
   --ignore IGNORE  Regex pattern to ignore (repeatable).
 ```
 
+## [get_changelog.py](get_changelog.py)
+```text
+usage: get_changelog.py [-h] [--path PATH] [--version VERSION]
+                        [--no-version-header]
+                        [--custom-sub-heading [CUSTOM_SUB_HEADING]]
+
+options:
+  -h, --help            show this help message and exit
+  --path PATH
+  --version VERSION     Defaults to most recent
+  --no-version-header
+  --custom-sub-heading [CUSTOM_SUB_HEADING]
+                        Replaces the "### " before subheadings like "Fixed".
+```
+
 # image
 
 ## [image_color_to_alpha.py](image_color_to_alpha.py)
