@@ -1,4 +1,10 @@
 This file was generated using the output of each script with "--help"
+# Subfolders
+ - [audio/](audio/INDEX.md)
+ - [git/](git/INDEX.md)
+ - [godot/](godot/INDEX.md)
+ - [Unity/](Unity/INDEX.md)
+
 # combine
 
 ## [combine_text_lines.py](combine_text_lines.py)
@@ -55,6 +61,27 @@ positional arguments:
 options:
   -h, --help  show this help message and exit
   --ext EXT   File extension to include (default: .cs).
+```
+
+# generate
+
+## [generate_bat_wrappers.py](generate_bat_wrappers.py)
+```text
+usage: generate_bat_wrappers.py [-h] [--file FILE] [--folder FOLDER]
+                                [--folder-recursive FOLDER_RECURSIVE]
+                                [--overwrite]
+
+Generate .bat wrappers for Python scripts.
+
+options:
+  -h, --help            show this help message and exit
+  --file FILE           Python script file. Repeatable. (default: [])
+  --folder FOLDER       Folder to scan for Python scripts. Repeatable.
+                        (default: [])
+  --folder-recursive FOLDER_RECURSIVE
+                        Folder to scan recursively for Python scripts.
+                        Repeatable. (default: [])
+  --overwrite           Overwrite existing .bat wrappers. (default: False)
 ```
 
 # get
