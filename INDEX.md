@@ -1,10 +1,4 @@
 This file was generated using the output of each script with "--help"
-# Subfolders
- - [audio/](audio/INDEX.md)
- - [git/](git/INDEX.md)
- - [godot/](godot/INDEX.md)
- - [Unity/](Unity/INDEX.md)
-
 # combine
 
 ## [combine_text_lines.py](combine_text_lines.py)
@@ -20,6 +14,31 @@ options:
   -h, --help   show this help message and exit
   --file FILE  Input file to read.
   --sort       Sort the lines?
+```
+
+# convert
+
+## [convert_video_to_gif.py](convert_video_to_gif.py)
+```text
+usage: convert_video_to_gif.py [-h] [--file FILE] [--folder FOLDER]
+                               [--folder-recursive FOLDER_RECURSIVE]
+                               [--ext EXT] [--fps FPS] [--width WIDTH]
+                               [--overwrite] [--verbose]
+
+Convert one or more video files to GIF using ffmpeg.
+
+options:
+  -h, --help            show this help message and exit
+  --file FILE           Video file to convert. Repeatable.
+  --folder FOLDER       Folder to scan for videos. Repeatable.
+  --folder-recursive FOLDER_RECURSIVE
+                        Folder to scan recursively for videos. Repeatable.
+  --ext EXT             Video extension to include. Repeatable.
+  --fps FPS             GIF frames per second.
+  --width WIDTH         Output width in pixels. Height is scaled
+                        automatically.
+  --overwrite           Overwrite GIFs that already exist.
+  --verbose             Print progress details.
 ```
 
 # count
