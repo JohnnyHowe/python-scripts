@@ -1,8 +1,30 @@
+# Usage
 See [INDEX.md](./INDEX.md)
 
-This folder and subfolders contain a bunch of Python scripts.
+This folder and subfolders contain a bunch of `python` scripts and `bat` wrappers
 
-# Goal/Constraints
+Runing `python` scripts
+```
+python <script-path>.py [args]
+```
+Or using bat wrapper
+```
+<script-path> [args]
+```
+
+# Developing
+
+## Index and Bat Wrappers
+All scripts are to have `.bat` file wrappers and be in the `INDEX.md` file for their folder.
+
+This is to be done by two scripts already present.
+```
+# CWD=<repo-root>
+
+python generate_bat_wrappers.py --folder-recursive .
+python .\generate_scripts_index.py --recursive 
+```
+
 ## Reusability
 All scripts reusable from command line, aside from where it would be redundant.
 
