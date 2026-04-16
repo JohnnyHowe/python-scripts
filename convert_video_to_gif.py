@@ -2,8 +2,8 @@
 Convert one or more video files to GIF using ffmpeg.
 """
 import argparse
+import asyncio
 from pathlib import Path
-import subprocess
 import tempfile
 from typing import Iterable
 
@@ -11,7 +11,7 @@ from typing import Iterable
 DEFAULT_EXTENSIONS = [".mp4", ".mov", ".avi", ".mkv", ".webm", ".m4v"]
 
 
-def convert_video_to_gif(
+async def convert_video_to_gif(
 	files: list[Path],
 	folders: list[Path],
 	recursive_folders: list[Path],
@@ -20,28 +20,42 @@ def convert_video_to_gif(
 	width: int | None,
 	overwrite: bool = False,
 	verbose: bool = False,
+	jobs: int = 1,
 ) -> int:
 	video_files = _get_video_files(files, folders, recursive_folders, extensions)
 	if len(video_files) == 0:
 		print("Error: no video files found.")
 		return 1
 
-	for file_path in video_files:
+	semaphore = asyncio.Semaphore(max(1, jobs))
+
+	async def _convert_single_file(file_path: Path) -> Exception | None:
 		output_path = file_path.with_suffix(".gif")
 		if output_path.exists() and not overwrite:
 			print(f"Skipping existing file: {output_path}")
-			continue
+			return None
 
 		if verbose:
 			print(f"Converting {file_path} -> {output_path}")
 
 		try:
-			_convert_file(file_path, output_path, fps, width, overwrite)
+			async with semaphore:
+				await _convert_file(file_path, output_path, fps, width, overwrite)
 		except Exception as exception:
-			print(f"Error converting {file_path}: {exception}")
-			return 1
+			return exception
 
-	return 0
+		return None
+
+	results = await asyncio.gather(*[_convert_single_file(file_path) for file_path in video_files])
+	had_errors = False
+
+	for file_path, exception in zip(video_files, results):
+		if exception is None:
+			continue
+		had_errors = True
+		print(f"Error converting {file_path}: {exception}")
+
+	return 1 if had_errors else 0
 
 
 def _get_video_files(
@@ -90,13 +104,27 @@ def _get_folder_video_files(folder: Path, extensions: list[str], recursive: bool
 	)
 
 
-def _convert_file(source: Path, output: Path, fps: int, width: int | None, overwrite: bool) -> None:
+async def _run_ffmpeg(command: list[str]) -> None:
+	process = await asyncio.create_subprocess_exec(
+		*command,
+		stdout=asyncio.subprocess.PIPE,
+		stderr=asyncio.subprocess.PIPE,
+	)
+	stdout, stderr = await process.communicate()
+	if process.returncode != 0:
+		stdout_text = stdout.decode(errors="replace").strip()
+		stderr_text = stderr.decode(errors="replace").strip()
+		message = stderr_text or stdout_text or "ffmpeg failed"
+		raise RuntimeError(message)
+
+
+async def _convert_file(source: Path, output: Path, fps: int, width: int | None, overwrite: bool) -> None:
 	filter_chain = _get_filter_chain(fps, width)
 	overwrite_flag = "-y" if overwrite else "-n"
 
 	with tempfile.TemporaryDirectory() as temp_dir:
 		palette_path = Path(temp_dir) / "palette.png"
-		subprocess.run(
+		await _run_ffmpeg(
 			[
 				"ffmpeg",
 				"-i",
@@ -105,12 +133,9 @@ def _convert_file(source: Path, output: Path, fps: int, width: int | None, overw
 				f"{filter_chain},palettegen",
 				overwrite_flag,
 				str(palette_path),
-			],
-			check=True,
-			capture_output=True,
-			text=True,
+			]
 		)
-		subprocess.run(
+		await _run_ffmpeg(
 			[
 				"ffmpeg",
 				"-i",
@@ -121,10 +146,7 @@ def _convert_file(source: Path, output: Path, fps: int, width: int | None, overw
 				f"{filter_chain} [x]; [x][1:v] paletteuse",
 				overwrite_flag,
 				str(output),
-			],
-			check=True,
-			capture_output=True,
-			text=True,
+			]
 		)
 
 
@@ -148,21 +170,25 @@ if __name__ == "__main__":
 		help="Folder to scan recursively for videos. Repeatable.",
 	)
 	parser.add_argument("--ext", action="append", default=[], help="Video extension to include. Repeatable.")
-	parser.add_argument("--fps", type=int, default=12, help="GIF frames per second.")
+	parser.add_argument("--fps", type=int, default=12, help="GIF frames per second. Default=12")
 	parser.add_argument("--width", type=int, help="Output width in pixels. Height is scaled automatically.")
+	parser.add_argument("--jobs", type=int, default=8, help="Number of files to convert concurrently. Default=8")
 	parser.add_argument("--overwrite", action="store_true", help="Overwrite GIFs that already exist.")
 	parser.add_argument("--verbose", action="store_true", help="Print progress details.")
 	args = parser.parse_args()
 
 	raise SystemExit(
-		convert_video_to_gif(
-			args.file,
-			args.folder,
-			args.folder_recursive,
-			args.ext,
-			args.fps,
-			args.width,
-			args.overwrite,
-			args.verbose,
+		asyncio.run(
+			convert_video_to_gif(
+				args.file,
+				args.folder,
+				args.folder_recursive,
+				args.ext,
+				args.fps,
+				args.width,
+				args.overwrite,
+				args.verbose,
+				args.jobs,
+			)
 		)
 	)

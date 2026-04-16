@@ -29,7 +29,7 @@ options:
 usage: convert_video_to_gif.py [-h] [--file FILE] [--folder FOLDER]
                                [--folder-recursive FOLDER_RECURSIVE]
                                [--ext EXT] [--fps FPS] [--width WIDTH]
-                               [--overwrite] [--verbose]
+                               [--jobs JOBS] [--overwrite] [--verbose]
 
 Convert one or more video files to GIF using ffmpeg.
 
@@ -40,9 +40,10 @@ options:
   --folder-recursive FOLDER_RECURSIVE
                         Folder to scan recursively for videos. Repeatable.
   --ext EXT             Video extension to include. Repeatable.
-  --fps FPS             GIF frames per second.
+  --fps FPS             GIF frames per second. Default=12
   --width WIDTH         Output width in pixels. Height is scaled
                         automatically.
+  --jobs JOBS           Number of files to convert concurrently. Default=8
   --overwrite           Overwrite GIFs that already exist.
   --verbose             Print progress details.
 ```
