@@ -6,6 +6,7 @@ import argparse
 from pathlib import Path
 from typing import Iterator, Optional
 import re
+from typing import List, Tuple
 
 
 VERSION_HEADER_PATTERN = r"^## \[([a-zA-Z0-9.]*)\] *$"
@@ -15,7 +16,7 @@ SUB_HEADING_PATTERN = r"^### (.*)$"
 SUB_HEADING_RE = re.compile(SUB_HEADING_PATTERN)
 
 
-def get_changelog(path: Path, version: str, strip_version_header: bool, custom_sub_header: Optional[str]) -> str:
+def get_changelog(path: Path, version: Optional[str], strip_version_header: bool, custom_sub_header: Optional[str]) -> str:
 	if not path.exists():
 		raise FileNotFoundError(
 			f"Could not find anything at {str(path.resolve)}")
@@ -31,27 +32,26 @@ def get_changelog(path: Path, version: str, strip_version_header: bool, custom_s
 		changelog_lines = changelog_lines[1:]
 
 	if custom_sub_header is not None:
-		changelog_lines = list(_apply_custom_sub_heading(
-			changelog_lines, custom_sub_header))
+		changelog_lines = list(_apply_custom_sub_heading(changelog_lines, custom_sub_header))
 
 	changelog = "".join(changelog_lines)
 	return changelog.strip()
 
 
-def _get_changelog_from_lines(lines: list[str], version: str) -> str:
+def _get_changelog_from_lines(lines: List[str], version: Optional[str]) -> List[str]:
 	start, end = _get_changelog_line_range(lines, version)
 	return lines[start: end]
 
 
-def _get_changelog_line_range(lines: list[str], version: str) -> tuple[int, int]:
+def _get_changelog_line_range(lines: List[str], version: Optional[str]) -> Tuple[int, int]:
 	"""
 	(start, end)
 	start: inclusive
 	end: exclusive
 	"""
-	take_first = version == None or version.strip == ""
+	take_first = version is None or version.strip() == ""
 
-	start = None
+	start = -1
 
 	header_line_number_generator = _get_version_header_line_numbers(lines)
 	for header, line_number in header_line_number_generator:
@@ -65,14 +65,14 @@ def _get_changelog_line_range(lines: list[str], version: str) -> tuple[int, int]
 	return (start, end)
 
 
-def _get_version_header_line_numbers(lines: list[str]) -> Iterator[tuple[str, int]]:
+def _get_version_header_line_numbers(lines: List[str]) -> Iterator[Tuple[str, int]]:
 	for line_index in range(len(lines)):
 		match = VERSION_HEADER_RE.match(lines[line_index])
 		if match:
 			yield (match.group(1), line_index)
 
 
-def _apply_custom_sub_heading(lines: list[str], custom_sub_header: str) -> Iterator[str]:
+def _apply_custom_sub_heading(lines: List[str], custom_sub_header: str) -> Iterator[str]:
 	for i in range(len(lines)):
 		match = SUB_HEADING_RE.match(lines[i])
 		if not match:
