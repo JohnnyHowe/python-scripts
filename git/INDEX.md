@@ -1,4 +1,7 @@
 This file was generated using the output of each script with "--help"
+# Subfolders
+ - [python_repo_pulling/](python_repo_pulling/INDEX.md)
+
 # check
 
 ## [check_gh_auth.py](check_gh_auth.py)
@@ -51,6 +54,16 @@ options:
   -h, --help       show this help message and exit
   --remote         Also delete merged remote branches.
   --ignore IGNORE  Branch name to ignore (can be repeated).
+```
+
+## [delete_local_only_branches.py](delete_local_only_branches.py)
+```text
+usage: delete_local_only_branches.py [-h]
+
+Delete local Git branches that do not exist on any remote.
+
+options:
+  -h, --help  show this help message and exit
 ```
 
 # ensure

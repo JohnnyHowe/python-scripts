@@ -1,38 +1,29 @@
 This file was generated using the output of each script with "--help"
 # convert
 
-## [convert_to_mono.py](convert_to_mono.py)
-```text
-usage: convert_to_mono.py [-h] [--ext EXT] [--dry-run] folder
-
-Convert all audio files in a folder to mono.
-
-positional arguments:
-  folder      Folder to scan recursively.
-
-options:
-  -h, --help  show this help message and exit
-  --ext EXT   File extension to include (repeatable).
-  --dry-run   Print what would change without writing files.
+## <span style="color:red">[convert_to_mono.py](convert_to_mono.py)</span>
+```
+/usr/bin/python audio/convert_to_mono.py --help
 ```
 
+Resulted in
+```
+Traceback (most recent call last):
+  File "/home/jon/Projects/dwarfhold/tools/audio/convert_to_mono.py", line 6, in <module>
+    from pydub import AudioSegment
+ModuleNotFoundError: No module named 'pydub'
+```
 # normalize
 
-## [normalize_audio.py](normalize_audio.py)
-```text
-usage: normalize_audio.py [-h] [--ext EXT] [--target-dbfs TARGET_DBFS]
-                          [--quiet]
-                          folder
+## <span style="color:red">[normalize_audio.py](normalize_audio.py)</span>
+```
+/usr/bin/python audio/normalize_audio.py --help
+```
 
-Normalize all audio files in a folder.
-
-positional arguments:
-  folder                Folder to scan recursively.
-
-options:
-  -h, --help            show this help message and exit
-  --ext EXT             File extension to include (repeatable).
-  --target-dbfs TARGET_DBFS
-                        Target peak dBFS (default: 0).
-  --quiet
+Resulted in
+```
+Traceback (most recent call last):
+  File "/home/jon/Projects/dwarfhold/tools/audio/normalize_audio.py", line 7, in <module>
+    from pydub import AudioSegment
+ModuleNotFoundError: No module named 'pydub'
 ```

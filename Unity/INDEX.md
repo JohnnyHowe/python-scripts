@@ -20,22 +20,18 @@ options:
 
 # delete
 
-## [delete_all_cache.py](delete_all_cache.py)
-```text
-usage: delete_all_cache.py [-h] [--project-root PROJECT_ROOT]
-                           [--no-unity-cache] [--no-gradle-cache] [--safe]
-
-Delete common Unity, Gradle, and project cache folders.
-
-options:
-  -h, --help            show this help message and exit
-  --project-root PROJECT_ROOT
-                        Unity project root.
-  --no-unity-cache      Skip Unity global cache folders.
-  --no-gradle-cache     Skip Gradle cache folders.
-  --safe                Send folders to recycle bin instead of deleting.
+## <span style="color:red">[delete_all_cache.py](delete_all_cache.py)</span>
+```
+/usr/bin/python Unity/delete_all_cache.py --help
 ```
 
+Resulted in
+```
+Traceback (most recent call last):
+  File "/home/jon/Projects/dwarfhold/tools/Unity/delete_all_cache.py", line 8, in <module>
+    from send2trash import send2trash
+ModuleNotFoundError: No module named 'send2trash'
+```
 ## [delete_corrupt_meta.py](delete_corrupt_meta.py)
 ```text
 usage: delete_corrupt_meta.py [-h] [--yes]

@@ -7,7 +7,7 @@ import argparse
 import shlex
 import subprocess
 import sys
-from typing import Iterable
+from typing import Iterable, Tuple
 
 HEADER = "This file was generated using the output of each script with \"--help\"\n"
 DEFAULT_OUTPUT_FILENAME = "INDEX.md"
@@ -46,7 +46,7 @@ def _generate_index_for_folder(filename: str, path: Path, recursive: bool = Fals
 	scripts_content = _generate_markdown_for_scripts(scripts)
 	contents = HEADER + child_indexes_contents + scripts_content
 
-	output_path = path / filename 
+	output_path = path / filename
 	output_path.write_text(contents, encoding="utf-8")
 	print(f"Created {str(output_path)}");
 	return True
@@ -123,7 +123,7 @@ def _get_script_markdown(script_path: Path) -> str:
 	return f"## {header}\n{help_output}"
 
 
-def _get_help_output(script_path: Path) -> (str, bool):
+def _get_help_output(script_path: Path) -> Tuple[str, bool]:
 	command = [sys.executable, str(script_path), "--help"]
 
 	result = subprocess.run(command, capture_output=True, text=True)

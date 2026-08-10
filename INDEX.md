@@ -1,10 +1,4 @@
 This file was generated using the output of each script with "--help"
-# Subfolders
- - [audio/](audio/INDEX.md)
- - [git/](git/INDEX.md)
- - [godot/](godot/INDEX.md)
- - [Unity/](Unity/INDEX.md)
-
 # combine
 
 ## [combine_text_lines.py](combine_text_lines.py)
